@@ -31,7 +31,7 @@ export default {
           type: 'nbsp',
           value: Array(match[0].length).fill('&nbsp;').join(''),
         })
-        processed += match.index + match.length
+        processed = match.index + match[0].length
       }
       values.push({
         type: 'plain',
