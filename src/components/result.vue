@@ -54,7 +54,7 @@ export default {
       this.replacers.push(['\\MM', ps(date.getMinutes())])
       this.replacers.push(['\\SS', ps(date.getSeconds())])
       this.replacers.push(['\\weekday', '日月火水木金土日'[date.getDay()]])
-      this.replacers.push([/\\delete[.\n]/g, '']) // file-name 等メタ情報の body に含まれる
+      this.replacers.push([/\\delete-newline\n?/g, '']) // file-name 等メタ情報の body に含まれる
     },
   },
   mounted() {
