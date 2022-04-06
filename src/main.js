@@ -17,7 +17,7 @@ Object.entries(components)
     component,
   ])
   .forEach(([name, component]) =>
-    app.component(name, component, console.log({ name, component }))
+    app.component(name, component)
   )
 
 app.mount('#app')
