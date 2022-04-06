@@ -1,5 +1,9 @@
 <template>
-  <a-text-field :model-value="value" @update:model-value="update" />
+  <a-text-field
+    class="o-file-name"
+    :model-value="value"
+    @update:model-value="update"
+  />
 </template>
 
 <script>
@@ -25,4 +29,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.o-file-name {
+  width: 16rem;
+}
+</style>

@@ -1,13 +1,13 @@
 <template>
   <div class="template-input-form">
-    <span v-for="(object, i) of separatedBody" :key="i">
-      <component
-        :v-if="getComponent(object.type)"
-        :is="getComponent(object.type)"
-        :object="object"
-        v-model:result="results[i]"
-      />
-    </span>
+    <component
+      v-for="(object, i) of separatedBody"
+      class="object"
+      :key="i"
+      :is="getComponent(object.type) ?? 'span'"
+      :object="object"
+      v-model:result="results[i]"
+    />
   </div>
 </template>
 
@@ -95,7 +95,9 @@ export default {
           const matches = line.matchAll(/\$\{(\d+)\}/g)
           let processed = 0
           const pushTextIfNeeded = (text) =>
-            text ? separatedBody.push({ type: 'plain', value: text }) : undefined
+            text
+              ? separatedBody.push({ type: 'plain', value: text })
+              : undefined
 
           for (const match of matches) {
             pushTextIfNeeded(line.slice(processed, match.index))
@@ -111,4 +113,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.template-input-form {
+  > .object {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+</style>
