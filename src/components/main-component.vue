@@ -39,7 +39,7 @@
         v-model:name="currentTemplate.name"
         v-model:body="currentTemplate.body"
       />
-      <a-textarea v-else class="result" :model-value="result.body" />
+      <result v-else :result="result" />
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@
 <script>
 import EditTemplate from './edit-template.vue'
 import TemplateInputForm from './template-input-form.vue'
+import Result from './result.vue'
 
 const storageKeyPrefix = '482f-template-input-form--'
 const storageKeys = Object.fromEntries(
@@ -70,6 +71,7 @@ export default {
   components: {
     EditTemplate,
     TemplateInputForm,
+    Result,
   },
   data() {
     return {
