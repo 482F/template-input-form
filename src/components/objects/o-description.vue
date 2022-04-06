@@ -1,5 +1,5 @@
 <template>
-  <o-plain :object="object" />
+  <o-plain class="o-description" :object="object" />
 </template>
 
 <script>
@@ -18,4 +18,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.o-description {
+  background-color: #ddd;
+}
+</style>
