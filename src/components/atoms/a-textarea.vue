@@ -1,10 +1,21 @@
 <template>
-  <v-textarea class="a-textarea" variant="outlined" no-resize />
+  <v-textarea
+    class="a-textarea"
+    variant="outlined"
+    no-resize
+    :readonly="readonly"
+  />
 </template>
 
 <script>
 export default {
   name: 'a-textarea',
+  props: {
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+  },
 }
 </script>
 
