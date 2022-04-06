@@ -24,7 +24,7 @@ export default {
     },
     update(newValue) {
       this.value = newValue
-      this.$emit('update:result', { fileName: newValue })
+      this.$emit('update:result', { fileName: newValue, body: '\\delete' })
     },
   },
   mounted() {
