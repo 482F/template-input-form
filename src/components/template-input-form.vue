@@ -72,7 +72,10 @@ export default {
     },
   },
   watch: {
-    results: {
+    'template.name'() {
+      this.results = []
+    },
+    'results': {
       handler() {
         const result = {}
         for (const part of this.results) {
