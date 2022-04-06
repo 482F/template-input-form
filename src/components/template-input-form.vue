@@ -5,6 +5,7 @@
         :v-if="getComponent(object.type)"
         :is="getComponent(object.type)"
         :object="object"
+        v-model:result="results[i]"
       />
     </span>
   </div>
@@ -42,9 +43,32 @@ export default {
       default: () => ({}),
     },
   },
+  data() {
+    return {
+      results: [],
+    }
+  },
   methods: {
     getComponent(type) {
       return objectComponents['o-' + type]
+    },
+  },
+  watch: {
+    results: {
+      handler() {
+        const result = {}
+        for (const part of this.results) {
+          if (!part) {
+            continue
+          }
+          for (const [key, value] of Object.entries(part)) {
+            result[key] ??= []
+            result[key].push(value)
+          }
+        }
+        this.$emit('update:result', result)
+      },
+      deep: true,
     },
   },
   computed: {
