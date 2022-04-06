@@ -8,24 +8,12 @@
           @update:model-value="updateCurrent"
           class="select"
         />
-        <a-button v-if="editing" @click="editing = false" icon>
-          <a-icon>mdi-eye</a-icon>
-        </a-button>
-        <a-button v-else @click="editTemplate" icon>
-          <a-icon>mdi-pencil</a-icon>
-        </a-button>
-        <a-button @click="addTemplate" icon>
-          <a-icon>mdi-plus</a-icon>
-        </a-button>
-        <a-button @click="deleteTemplate" icon>
-          <a-icon>mdi-delete</a-icon>
-        </a-button>
-        <a-button icon @click="saveTemplates">
-          <a-icon>mdi-content-save</a-icon>
-        </a-button>
-        <a-button icon @click="restoreTemplates">
-          <a-icon>mdi-backup-restore</a-icon>
-        </a-button>
+        <a-icon-button v-if="editing" @click="editing = false" icon="mdi-eye" />
+        <a-icon-button v-else @click="editTemplate" icon="mdi-pencil" />
+        <a-icon-button @click="addTemplate" icon="mdi-plus" />
+        <a-icon-button @click="deleteTemplate" icon="mdi-delete" />
+        <a-icon-button @click="saveTemplates" icon="mdi-content-save" />
+        <a-icon-button @click="restoreTemplates" icon="mdi-backup-restore" />
       </div>
       <template-input-form
         class="template-input-form"

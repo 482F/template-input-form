@@ -5,12 +5,8 @@
         ファイル名: <span class="filename">{{ fileName }}</span>
       </div>
       <div class="controls">
-        <a-button icon @click="download">
-          <a-icon> mdi-download </a-icon>
-        </a-button>
-        <a-button icon @click="copy">
-          <a-icon> mdi-content-copy </a-icon>
-        </a-button>
+        <a-icon-button @click="download" icon="mdi-download" />
+        <a-icon-button @click="copy" icon="mdi-content-copy" />
       </div>
     </div>
     <a-textarea tabindex="-1" class="body" :model-value="body" readonly />
