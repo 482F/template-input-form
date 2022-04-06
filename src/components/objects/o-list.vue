@@ -1,7 +1,11 @@
 <template>
   <a-textarea
     class="o-list"
+    :style="{
+      '--height': height + 'rem',
+    }"
     ref="aTextarea"
+    resizable
     :model-value="value"
     @update:model-value="update"
     @keydown="onKeydown"
@@ -104,5 +108,6 @@ export default {
 <style lang="scss" scoped>
 .o-list {
   width: 100%;
+  height: var(--height);
 }
 </style>

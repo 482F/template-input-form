@@ -1,6 +1,9 @@
 <template>
   <a-text-field
     class="o-file-name"
+    :style="{
+      '--width': width + 'rem',
+    }"
     ref="aTextField"
     :model-value="value"
     @update:model-value="update"
@@ -35,7 +38,7 @@ export default {
 
 <style lang="scss" scoped>
 .o-file-name {
-  width: 16rem;
+  width: var(--width);
   padding: 0.5rem 0;
 }
 </style>
