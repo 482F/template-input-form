@@ -4,7 +4,7 @@
 
 "482-js-utils@https://github.com/482F/482-js-utils.git":
   version "1.0.0"
-  resolved "https://github.com/482F/482-js-utils.git#cf1a4d88292b2be4b150ffe4e90332afc370abd2"
+  resolved "https://github.com/482F/482-js-utils.git#cc9a2213ee15d9af2dae8dd6308ebd5a1a1efeea"
 
 "@babel/parser@^7.16.4":
   version "7.17.9"

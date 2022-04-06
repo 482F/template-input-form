@@ -1,13 +1,25 @@
 <template>
   <div class="result">
-    <div class="controls">
-      ファイル名: <span class="filename">{{ fileName }}</span>
+    <div class="header">
+      <div class="file-name">
+        ファイル名: <span class="filename">{{ fileName }}</span>
+      </div>
+      <div class="controls">
+        <a-button icon @click="download">
+          <a-icon> mdi-download </a-icon>
+        </a-button>
+        <a-button icon @click="copy">
+          <a-icon> mdi-content-copy </a-icon>
+        </a-button>
+      </div>
     </div>
     <a-textarea tabindex="-1" class="body" :model-value="body" readonly />
   </div>
 </template>
 
 <script>
+import * as utils from '482-js-utils'
+
 export default {
   name: 'result',
   data() {
@@ -22,6 +34,12 @@ export default {
     },
   },
   methods: {
+    download() {
+      utils.downloadText(this.fileName, this.body)
+    },
+    copy() {
+      utils.clipText(this.body)
+    },
     resolve(text) {
       let newText = text
       this.replacers.forEach(
@@ -40,7 +58,7 @@ export default {
       this.replacers.push(['\\MM', ps(date.getMinutes())])
       this.replacers.push(['\\SS', ps(date.getSeconds())])
       this.replacers.push(['\\weekday', '日月火水木金土日'[date.getDay()]])
-      this.replacers.push([ /\\delete[.\n]/g, '']) // file-name 等メタ情報の body に含まれる
+      this.replacers.push([/\\delete[.\n]/g, '']) // file-name 等メタ情報の body に含まれる
     },
   },
   mounted() {
@@ -66,7 +84,19 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  .body {
+  > .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    > .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+  > .body {
     flex-grow: 1;
   }
 }
