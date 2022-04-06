@@ -1,6 +1,7 @@
 <template>
   <v-textarea
     class="a-textarea"
+    ref="root"
     variant="outlined"
     no-resize
     :readonly="readonly"
@@ -14,6 +15,11 @@ export default {
     readonly: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    focus() {
+      this.$refs.root?.$el?.getElementsByTagName('textarea')?.[0]?.focus?.()
     },
   },
 }
