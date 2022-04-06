@@ -4,6 +4,7 @@
       ファイル名: <span class="filename">{{ result.fileName?.[0] ?? '' }}</span>
     </div>
     <a-textarea
+      tabindex="-1"
       class="body"
       :model-value="result.body?.join?.('') ?? ''"
       readonly
