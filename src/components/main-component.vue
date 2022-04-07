@@ -1,60 +1,70 @@
 <template>
   <div class="main-component">
-    <div class="left">
-      <div class="template-control">
-        <a-select
-          :model-value="currentTemplate?.name"
-          :items="templates.map((template) => template.name)"
-          @update:model-value="updateCurrent"
-          class="select"
-        />
-        <a-icon-button
-          v-if="editing"
-          @click="stopEdit"
-          icon="mdi-eye"
-          tooltip="編集を中断"
-        />
-        <a-icon-button
-          v-else
-          @click="editTemplate"
-          icon="mdi-pencil"
-          tooltip="現在のテンプレートを編集"
-        />
-        <a-icon-button
-          @click="addTemplate"
-          icon="mdi-plus"
-          tooltip="新規テンプレートを作成"
-        />
-        <a-icon-button
-          @click="deleteTemplate"
-          icon="mdi-delete"
-          tooltip="現在のテンプレートを削除"
-        />
-        <a-icon-button
-          @click="saveTemplates"
-          icon="mdi-content-save"
-          tooltip="全ての変更を保存"
-        />
-        <a-icon-button
-          @click="restoreTemplates"
-          icon="mdi-backup-restore"
-          tooltip="全ての変更を破棄して戻す"
+    <div class="header">
+      <a :href="otherVersion.link">
+        <a-icon-button :icon="otherVersion.icon" :tooltip="otherVersion.name" />
+      </a>
+      <a href="https://github.com/482F/template-input-form/wiki">
+        <a-icon-button icon="mdi-library-shelves" tooltip="wiki" />
+      </a>
+    </div>
+    <div class="content">
+      <div class="left">
+        <div class="template-control">
+          <a-select
+            :model-value="currentTemplate?.name"
+            :items="templates.map((template) => template.name)"
+            @update:model-value="updateCurrent"
+            class="select"
+          />
+          <a-icon-button
+            v-if="editing"
+            @click="stopEdit"
+            icon="mdi-eye"
+            tooltip="編集を中断"
+          />
+          <a-icon-button
+            v-else
+            @click="editTemplate"
+            icon="mdi-pencil"
+            tooltip="現在のテンプレートを編集"
+          />
+          <a-icon-button
+            @click="addTemplate"
+            icon="mdi-plus"
+            tooltip="新規テンプレートを作成"
+          />
+          <a-icon-button
+            @click="deleteTemplate"
+            icon="mdi-delete"
+            tooltip="現在のテンプレートを削除"
+          />
+          <a-icon-button
+            @click="saveTemplates"
+            icon="mdi-content-save"
+            tooltip="全ての変更を保存"
+          />
+          <a-icon-button
+            @click="restoreTemplates"
+            icon="mdi-backup-restore"
+            tooltip="全ての変更を破棄して戻す"
+          />
+        </div>
+        <template-input-form
+          class="template-input-form"
+          v-if="!reloading"
+          :template="currentTemplate ?? {}"
+          v-model:result="result"
         />
       </div>
-      <template-input-form
-        class="template-input-form"
-        v-if="!reloading"
-        :template="currentTemplate ?? {}"
-        v-model:result="result"
-      />
-    </div>
-    <div class="right">
-      <edit-template
-        v-if="editing"
-        v-model:name="currentTemplate.name"
-        v-model:body="currentTemplate.body"
-      />
-      <result v-else :result="result" />
+      <div class="right">
+        <edit-template
+          v-if="editing"
+          v-model:name="currentTemplate.name"
+          v-model:body="currentTemplate.body"
+        />
+        <result v-else :result="result" />
+      </div>
     </div>
   </div>
 </template>
@@ -96,6 +106,21 @@ export default {
       templates: [],
       result: {},
     }
+  },
+  computed: {
+    otherVersion() {
+      return location.href.match(/latest\/$/)
+        ? {
+            link: location.href.replace(/latest\/$/, ''),
+            name: '安定版',
+            icon: 'mdi-scale-balance',
+          }
+        : {
+            link: location.href + 'latest/',
+            name: '最新版',
+            icon: 'mdi-scale-unbalanced',
+          }
+    },
   },
   methods: {
     setUniqueName(targetTemplate) {
@@ -189,42 +214,55 @@ export default {
 <style lang="scss" scoped>
 .main-component {
   height: 100vh;
-  padding: 3rem 12rem;
+  padding: 1rem 12rem;
   display: flex;
-  justify-content: center;
-  align-items: start;
-  gap: 2rem;
-  > .left,
-  > .right {
-    width: 0;
-    height: 100%;
-    flex-grow: 1;
-    flex-shrink: 0;
+  flex-direction: column;
+  gap: 0.5rem;
+  > .header {
     display: flex;
-    flex-direction: column;
     gap: 1rem;
+    > a {
+      color: black;
+    }
   }
-  > .left {
-    overflow-y: scroll;
-    padding-right: 1rem;
-    > .template-control {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background-color: white;
+  > .content {
+    min-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 2rem;
+    > .left,
+    > .right {
+      width: 0;
+      height: 100%;
+      flex-grow: 1;
+      flex-shrink: 0;
       display: flex;
-      justify-content: center;
-      align-items: center;
+      flex-direction: column;
       gap: 1rem;
     }
-    > .template-input-form {
-      min-height: 0;
-      flex-grow: 1;
+    > .left {
+      overflow-y: scroll;
+      padding-right: 1rem;
+      > .template-control {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      > .template-input-form {
+        min-height: 0;
+        flex-grow: 1;
+      }
     }
-  }
-  > .right {
-    > * {
-      height: 100%;
+    > .right {
+      > * {
+        height: 100%;
+      }
     }
   }
 }
