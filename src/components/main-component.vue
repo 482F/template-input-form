@@ -10,7 +10,7 @@
         />
         <a-icon-button
           v-if="editing"
-          @click="editing = false"
+          @click="stopEdit"
           icon="mdi-eye"
           tooltip="編集を中断"
         />
@@ -43,6 +43,7 @@
       </div>
       <template-input-form
         class="template-input-form"
+        v-if="!reloading"
         :template="currentTemplate ?? {}"
         v-model:result="result"
       />
@@ -90,6 +91,7 @@ export default {
   data() {
     return {
       editing: false,
+      reloading: false,
       currentTemplate: null,
       templates: [],
       result: {},
@@ -125,6 +127,15 @@ export default {
       this.currentTemplate = newTemplate
       this.editTemplate()
     },
+    async reloadInputForm() {
+      this.reloading = true
+      await this.$nextTick()
+      this.reloading = false
+    },
+    async stopEdit() {
+      this.reloadInputForm()
+      this.editing = false
+    },
     editTemplate() {
       if (!this.currentTemplate) {
         this.addTemplate()
@@ -143,6 +154,7 @@ export default {
       this.currentTemplate = this.templates[0]
     },
     saveTemplates() {
+      this.reloadInputForm()
       this.setUniqueName(this.currentTemplate)
       localStorage.setItem(
         storageKeys.templates,
