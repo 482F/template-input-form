@@ -16,7 +16,7 @@ export default {
   mixins: [ObjectsMixin],
   data() {
     return {
-      value: '',
+      value: false,
     }
   },
   computed: {
@@ -39,7 +39,7 @@ export default {
     },
   },
   mounted() {
-    this.update(this.object.default ?? '')
+    this.update(this.object.default ?? false)
   },
 }
 </script>
