@@ -14,6 +14,9 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
+  build: {
+    outDir: 'dist/latest',
+  },
   define: { 'process.env': {} },
   resolve: {
     alias: {
