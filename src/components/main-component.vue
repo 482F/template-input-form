@@ -1,8 +1,16 @@
 <template>
   <div class="main-component">
     <div class="header">
-      <a :href="otherVersion.link">
-        <a-icon-button :icon="otherVersion.icon" :tooltip="otherVersion.name" />
+      <a class="version-icon" :href="version.other.link">
+        <a-icon-button
+          class="icon current"
+          :icon="version.current.icon"
+        />
+        <a-icon-button
+          class="icon other"
+          :icon="version.other.icon"
+          :tooltip="version.other.name + 'へ'"
+        />
       </a>
       <a href="https://github.com/482F/template-input-form/wiki">
         <a-icon-button icon="mdi-library-shelves" tooltip="wiki" />
@@ -113,18 +121,21 @@ export default {
     }
   },
   computed: {
-    otherVersion() {
+    version() {
+      const stable = {
+        link: location.href.replace(/latest\/$/, ''),
+        name: '安定版',
+        icon: 'mdi-scale-balance',
+      }
+
+      const latest = {
+        link: location.href + 'latest/',
+        name: '最新版',
+        icon: 'mdi-scale-unbalanced',
+      }
       return location.href.match(/latest\/$/)
-        ? {
-            link: location.href.replace(/latest\/$/, ''),
-            name: '安定版',
-            icon: 'mdi-scale-balance',
-          }
-        : {
-            link: location.href + 'latest/',
-            name: '最新版',
-            icon: 'mdi-scale-unbalanced',
-          }
+        ? { current: latest, other: stable }
+        : { current: stable, other: latest }
     },
   },
   methods: {
@@ -226,6 +237,23 @@ export default {
     gap: 1rem;
     > a {
       color: black;
+    }
+    > .version-icon {
+      position: relative;
+      > .other {
+        position: absolute;
+        left: 0;
+      }
+      &:hover {
+        > .current {
+          visibility: hidden;
+        }
+      }
+      &:not(:hover) {
+        > .other {
+          visibility: hidden;
+        }
+      }
     }
   }
   > .content {
