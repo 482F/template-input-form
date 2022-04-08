@@ -50,12 +50,12 @@
           <a-icon-button
             @click="saveTemplates"
             icon="mdi-content-save"
-            tooltip="全ての変更を保存"
+            tooltip="全てのテンプレートの変更を保存"
           />
           <a-icon-button
             @click="restoreTemplates"
             icon="mdi-backup-restore"
-            tooltip="全ての変更を破棄して戻す"
+            tooltip="全てのテンプレートの変更を破棄して戻す"
           />
           <a-icon-button
             @click="reloadInputForm"
