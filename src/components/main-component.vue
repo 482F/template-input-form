@@ -49,6 +49,11 @@
             icon="mdi-backup-restore"
             tooltip="全ての変更を破棄して戻す"
           />
+          <a-icon-button
+            @click="reloadInputForm"
+            icon="mdi-reload"
+            tooltip="入力フォームを初期化する"
+          />
         </div>
         <template-input-form
           class="template-input-form"
@@ -158,7 +163,6 @@ export default {
       this.reloading = false
     },
     async stopEdit() {
-      this.reloadInputForm()
       this.editing = false
     },
     editTemplate() {
@@ -179,7 +183,6 @@ export default {
       this.currentTemplate = this.templates[0]
     },
     saveTemplates() {
-      this.reloadInputForm()
       this.setUniqueName(this.currentTemplate)
       localStorage.setItem(
         storageKeys.templates,
