@@ -1,13 +1,23 @@
 <template>
   <div class="template-input-form">
     <span v-for="(object, i) of separatedBody" :key="i">
-      <show-object :object="object" />
+      <component
+        :v-if="getComponent(object.type)"
+        :is="getComponent(object.type)"
+        :object="object"
+      />
     </span>
   </div>
 </template>
 
 <script>
-import ShowObject from './show-object.vue'
+const rawObjectComponents = import.meta.globEager('./objects/*.vue')
+const objectComponents = Object.fromEntries(
+  Object.entries(rawObjectComponents).map(([path, { default: component }]) => [
+    path.match(/[^/]+(?=\.vue)/)[0],
+    component,
+  ])
+)
 
 function parseObject(objectString) {
   return Object.fromEntries(
@@ -21,9 +31,7 @@ function parseObject(objectString) {
 
 export default {
   name: 'template-input-form',
-  components: {
-    ShowObject,
-  },
+  components: {},
   props: {
     template: {
       type: Object,
@@ -32,6 +40,11 @@ export default {
     result: {
       type: Object,
       default: () => ({}),
+    },
+  },
+  methods: {
+    getComponent(type) {
+      return objectComponents['o-' + type]
     },
   },
   computed: {
