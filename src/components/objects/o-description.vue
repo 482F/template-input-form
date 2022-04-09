@@ -21,5 +21,6 @@ export default {
 <style lang="scss" scoped>
 .o-description {
   background-color: #ddd;
+  padding: 0 0.7rem;
 }
 </style>
