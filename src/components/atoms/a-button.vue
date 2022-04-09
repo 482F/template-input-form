@@ -1,6 +1,5 @@
 <template>
   <v-btn
-    @click="$emit('click', $event)"
     :icon="icon"
     flat
     density="compact"
