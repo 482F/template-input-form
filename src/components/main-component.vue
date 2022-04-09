@@ -8,12 +8,38 @@
           @update:model-value="updateCurrent"
           class="select"
         />
-        <a-icon-button v-if="editing" @click="editing = false" icon="mdi-eye" />
-        <a-icon-button v-else @click="editTemplate" icon="mdi-pencil" />
-        <a-icon-button @click="addTemplate" icon="mdi-plus" />
-        <a-icon-button @click="deleteTemplate" icon="mdi-delete" />
-        <a-icon-button @click="saveTemplates" icon="mdi-content-save" />
-        <a-icon-button @click="restoreTemplates" icon="mdi-backup-restore" />
+        <a-icon-button
+          v-if="editing"
+          @click="editing = false"
+          icon="mdi-eye"
+          tooltip="編集を中断"
+        />
+        <a-icon-button
+          v-else
+          @click="editTemplate"
+          icon="mdi-pencil"
+          tooltip="現在のテンプレートを編集"
+        />
+        <a-icon-button
+          @click="addTemplate"
+          icon="mdi-plus"
+          tooltip="新規テンプレートを作成"
+        />
+        <a-icon-button
+          @click="deleteTemplate"
+          icon="mdi-delete"
+          tooltip="現在のテンプレートを削除"
+        />
+        <a-icon-button
+          @click="saveTemplates"
+          icon="mdi-content-save"
+          tooltip="全ての変更を保存"
+        />
+        <a-icon-button
+          @click="restoreTemplates"
+          icon="mdi-backup-restore"
+          tooltip="全ての変更を破棄して戻す"
+        />
       </div>
       <template-input-form
         class="template-input-form"
