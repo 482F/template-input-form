@@ -6,7 +6,7 @@
 import ObjectsMixin from './objects.mixin.js'
 
 export default {
-  name: 'o-text',
+  name: 'o-file-name',
   mixins: [ObjectsMixin],
   data() {
     return {

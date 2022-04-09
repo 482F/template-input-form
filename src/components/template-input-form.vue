@@ -95,7 +95,7 @@ export default {
           const matches = line.matchAll(/\$\{(\d+)\}/g)
           let processed = 0
           const pushTextIfNeeded = (text) =>
-            text ? separatedBody.push({ type: 'text', value: text }) : undefined
+            text ? separatedBody.push({ type: 'plain', value: text }) : undefined
 
           for (const match of matches) {
             pushTextIfNeeded(line.slice(processed, match.index))
