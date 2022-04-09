@@ -1,5 +1,10 @@
 <template>
-  <a-text-field class="o-text" :model-value="value" @update:model-value="update" />
+  <a-text-field
+    class="o-text"
+    ref="aTextField"
+    :model-value="value"
+    @update:model-value="update"
+  />
 </template>
 
 <script>
@@ -14,6 +19,9 @@ export default {
     }
   },
   methods: {
+    focus() {
+      this.$refs.aTextField.focus()
+    },
     update(newValue) {
       this.value = newValue
       this.$emit('update:result', { body: newValue })
