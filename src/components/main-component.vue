@@ -287,6 +287,7 @@ export default {
         gap: 1rem;
       }
       > .template-input-form {
+        overflow-wrap: anywhere;
         min-height: 0;
         flex-grow: 1;
       }
