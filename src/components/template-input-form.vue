@@ -27,7 +27,7 @@ function parseObject(objectString) {
     [
       ...objectString
         .replaceAll(/^\$\{|\}$/gm, '')
-        .matchAll(/(?<key>[^\s]+?):\s+(?<value>(\[[^\]]+\]|[^,]+))(,|$)/g),
+        .matchAll(/(?<key>[^\s]+?):\s*(?<value>(\[[^\]]+\]|[^,]+))(,|$)/g),
     ].map((match) => [match.groups.key, match.groups.value])
   )
 }
