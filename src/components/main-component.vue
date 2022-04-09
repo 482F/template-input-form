@@ -184,6 +184,7 @@ export default {
     > .template-control {
       position: sticky;
       top: 0;
+      z-index: 1;
       background-color: white;
       display: flex;
       justify-content: center;
