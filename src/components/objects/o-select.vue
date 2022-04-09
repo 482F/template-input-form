@@ -1,6 +1,9 @@
 <template>
   <a-select
     class="o-select"
+    :style="{
+      '--width': width + 'rem',
+    }"
     ref="aSelect"
     :model-value="value"
     :items="items"
@@ -44,7 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .o-select {
-  width: 16rem;
+  width: var(--width);
   padding: 0.5rem 0;
 }
 </style>
