@@ -25,6 +25,12 @@ export default {
     }
   },
   computed: {
+    heads() {
+      return (this.object.heads ?? '["- "]')
+        .replaceAll(/^\[|\]$/g, '')
+        .split(',')
+        .map((value) => value.replaceAll(/^\s*["']?|["']?\s*$/g, ''))
+    },
     textarea() {
       return this.$refs.aTextarea.$el.getElementsByTagName('textarea')[0]
     },
@@ -37,7 +43,7 @@ export default {
       this.$refs.aTextarea.focus()
     },
     getHead(indent) {
-      const heads = this.object.heads ?? '・'
+      const heads = this.heads ?? ['- ']
       return heads[indent] ?? heads.at(-1)
     },
     getIndentText(indent) {
