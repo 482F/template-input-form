@@ -1,13 +1,18 @@
 <template>
-  <a-text-field
+  <span
     class="o-file-name"
     :style="{
       '--width': width + 'rem',
     }"
-    ref="aTextField"
-    :model-value="value"
-    @update:model-value="update"
-  />
+  >
+    <span>ファイル名:</span>
+    <a-text-field
+      ref="aTextField"
+      class="a-text-field"
+      :model-value="value"
+      @update:model-value="update"
+    />
+  </span>
 </template>
 
 <script>
@@ -27,7 +32,10 @@ export default {
     },
     update(newValue) {
       this.value = newValue
-      this.$emit('update:result', { fileName: newValue, body: '\\delete-newline' })
+      this.$emit('update:result', {
+        fileName: newValue,
+        body: '\\delete-newline',
+      })
     },
   },
   mounted() {
@@ -40,5 +48,14 @@ export default {
 .o-file-name {
   width: var(--width);
   padding: 0.5rem 0;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 1rem;
+  > .a-text-field {
+    display: inline-block;
+    vertical-align: middle;
+    flex-grow: 1;
+    min-width: 0;
+  }
 }
 </style>
