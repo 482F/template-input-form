@@ -2,10 +2,7 @@
   <div class="main-component">
     <div class="header">
       <a class="version-icon" :href="version.other.link">
-        <a-icon-button
-          class="icon current"
-          :icon="version.current.icon"
-        />
+        <a-icon-button class="icon current" :icon="version.current.icon" />
         <a-icon-button
           class="icon other"
           :icon="version.other.icon"
@@ -227,13 +224,15 @@ export default {
 
 <style lang="scss" scoped>
 .main-component {
+  --padding-x: 12rem;
   height: 100vh;
-  padding: 1rem 12rem;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   > .header {
     display: flex;
+    padding: 0 var(--padding-x);
     gap: 1rem;
     > a {
       color: black;
@@ -258,10 +257,11 @@ export default {
   }
   > .content {
     min-height: 0;
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: start;
-    gap: 2rem;
+    gap: 1rem;
     > .left,
     > .right {
       width: 0;
@@ -275,6 +275,7 @@ export default {
     > .left {
       overflow-y: scroll;
       padding-right: 1rem;
+      padding-left: var(--padding-x);
       > .template-control {
         position: sticky;
         top: 0;
@@ -291,6 +292,7 @@ export default {
       }
     }
     > .right {
+      padding-right: var(--padding-x);
       > * {
         height: 100%;
       }
