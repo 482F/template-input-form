@@ -104,7 +104,7 @@ export default {
 
       this.template.body
         .replaceAll(/^\/\*(.|\n)*?\*\/\n|^\/\/.*?\n/gm, '') // 行頭からのコメント (// foo, /* bar */)
-        .replaceAll(/\/\*(.|\n)*?\*\/$|\/\/.*?$/gm, '') // 前に何かあるコメント (abc // foo, def /* bar */)
+        .replaceAll(/\/\*(.|\n)*?\*\/|\/\/.*?$/gm, '') // 前に何かあるコメント (abc // foo, def /* bar */)
         .replaceAll(/\$\{([^}]+)\}/g, (match) => {
           // オブジェクト (${foobar})
           // 副作用有り
