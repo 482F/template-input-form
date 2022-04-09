@@ -10,6 +10,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "482-js-utils": "https://github.com/482F/482-js-utils.git",
     "@mdi/font": "5.9.55",
     "roboto-fontface": "*",
     "vue": "^3.2.25",

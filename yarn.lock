@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"482-js-utils@https://github.com/482F/482-js-utils.git":
+  version "1.0.0"
+  resolved "https://github.com/482F/482-js-utils.git#c9b00a9df5cd5d6b57c6ebe34a0ce2dfa718d0fd"
+
 "@babel/parser@^7.16.4":
   version "7.17.9"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.17.9.tgz#9c94189a6062f0291418ca021077983058e171ef"
