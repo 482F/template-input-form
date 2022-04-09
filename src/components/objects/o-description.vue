@@ -13,7 +13,7 @@ export default {
     OPlain,
   },
   mounted() {
-    this.$emit('update:result', { body: '' })
+    this.$emit('update:result', { body: '\\delete-newline' })
   },
 }
 </script>
