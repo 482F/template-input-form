@@ -16,8 +16,6 @@
 import ObjectsMixin from './objects.mixin.js'
 import * as utils from '482-js-utils'
 
-const indentSpaces = '  '
-
 export default {
   name: 'o-list',
   mixins: [ObjectsMixin],
@@ -30,6 +28,9 @@ export default {
     textarea() {
       return this.$refs.aTextarea.$el.getElementsByTagName('textarea')[0]
     },
+    indentString() {
+      return this.object?.indent?.replaceAll?.(/^['"]|['"]$/g, '') ?? '  '
+    },
   },
   methods: {
     focus() {
@@ -41,9 +42,7 @@ export default {
     },
     getIndentText(indent) {
       const head = this.getHead(indent)
-      const spaces = Array(indent * indentSpaces.length)
-        .fill(' ')
-        .join('')
+      const spaces = Array(indent).fill(this.indentString).join('')
       return spaces + head
     },
     update(newValue) {
@@ -56,9 +55,9 @@ export default {
       }
       const text = utils.textarea.getRow(this.textarea, { row })
       const indent =
-        (text.match(/^ +/)?.[0]?.length ??
+        (text.match(new RegExp('^' + this.indentString + '+'))?.[0]?.length ??
           (text.match(new RegExp('^' + this.getHead(0))) ? 0 : -2)) /
-        indentSpaces.length
+        this.indentString.length
       return {
         text,
         indent,
