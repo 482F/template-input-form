@@ -2,11 +2,13 @@
   <div class="template-input-form">
     <component
       v-for="(object, i) of separatedBody"
+      ref="objects"
       class="object"
       :key="i"
       :is="getComponent(object.type) ?? 'span'"
       :object="object"
       v-model:result="results[i]"
+      @keydown.capture="(e) => onKeydown(e, i)"
     />
   </div>
 </template>
@@ -49,6 +51,22 @@ export default {
     }
   },
   methods: {
+    moveForm(currentIndex, delta) {
+      const objects = this.$refs.objects
+      ;(delta < 0
+        ? objects.slice(0, currentIndex).reverse()
+        : objects.slice(currentIndex + 1)
+      )
+        .filter((object) => object?.focus && !object.__proto__)?.[0]
+        ?.focus()
+    },
+    onKeydown(e, i) {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        const delta = e.shiftKey ? -1 : 1
+        this.moveForm(i, delta)
+        e.stopPropagation()
+      }
+    },
     getComponent(type) {
       return objectComponents['o-' + type]
     },
