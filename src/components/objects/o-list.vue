@@ -35,7 +35,7 @@ export default {
       return this.$refs.aTextarea.$el.getElementsByTagName('textarea')[0]
     },
     indentString() {
-      return this.object?.indent?.replaceAll?.(/^['"]|['"]$/g, '') ?? '  '
+      return this.object?.indent?.replaceAll?.(/^['"]|['"]$/g, '') || '  ' // 空白の場合もデフォルトのインデントに
     },
   },
   methods: {
