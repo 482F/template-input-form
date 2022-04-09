@@ -32,5 +32,6 @@ export default {
 <style lang="scss" scoped>
 .o-file-name {
   width: 16rem;
+  padding: 0.5rem 0;
 }
 </style>
