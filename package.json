@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "482-js-utils": "https://github.com/482F/482-js-utils.git",
-    "@mdi/font": "5.9.55",
+    "@mdi/font": "6.6.96",
     "roboto-fontface": "*",
     "vue": "^3.2.25",
     "vuetify": "^3.0.0-beta.0",
