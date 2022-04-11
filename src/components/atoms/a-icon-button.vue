@@ -1,18 +1,20 @@
 <template>
-  <v-tooltip
-    :model-value="tooltipValue"
-    @update:model-value="showTooltipIfNeeded"
-    anchor="bottom"
-  >
-    <template v-slot:activator="{ props }">
-      <a-button icon @click="$emit('click')" v-bind="props">
-        <a-icon>
-          {{ icon }}
-        </a-icon>
-      </a-button>
-    </template>
-    {{ tooltip }}
-  </v-tooltip>
+  <span>
+    <v-tooltip
+      :model-value="tooltipValue"
+      @update:model-value="showTooltipIfNeeded"
+      anchor="bottom"
+    >
+      <template v-slot:activator="{ props }">
+        <a-button icon @click="$emit('click')" v-bind="props">
+          <a-icon>
+            {{ icon }}
+          </a-icon>
+        </a-button>
+      </template>
+      {{ tooltip }}
+    </v-tooltip>
+  </span>
 </template>
 
 <script>
