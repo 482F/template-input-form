@@ -6,7 +6,7 @@
       anchor="bottom"
     >
       <template v-slot:activator="{ props }">
-        <a-button icon @click="$emit('click')" v-bind="props">
+        <a-button icon v-bind="props">
           <a-icon>
             {{ icon }}
           </a-icon>
