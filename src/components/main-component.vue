@@ -236,6 +236,7 @@ export default {
     gap: 1rem;
     > a {
       color: black;
+      text-decoration: none;
     }
     > .version-icon {
       position: relative;
