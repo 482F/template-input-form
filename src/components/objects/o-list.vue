@@ -24,6 +24,12 @@ export default {
       value: '',
     }
   },
+  props: {
+    autoIndent: {
+      type: Boolean,
+      default: true,
+    },
+  },
   computed: {
     heads() {
       return (this.object.heads ?? '["- "]')
@@ -85,7 +91,7 @@ export default {
     },
     onKeydown(e) {
       if (e.key === 'Enter') {
-        if (e.shiftKey) {
+        if (!this.autoIndent || e.shiftKey) {
           return
         }
         utils.textarea.spliceText(
