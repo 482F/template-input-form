@@ -54,7 +54,7 @@ export default {
     },
     getIndentText(indent) {
       const head = this.getHead(indent)
-      const spaces = Array(indent).fill(this.indentString).join('')
+      const spaces = Array(Math.max(indent, 0)).fill(this.indentString).join('')
       return spaces + head
     },
     update(newValue) {
