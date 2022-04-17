@@ -16,6 +16,51 @@
 <script>
 import * as utils from '482-js-utils'
 
+const fromStringGG = (str) =>
+  function* () {
+    for (let i = 0; ; i++) {
+      yield str[Math.min(str.length - 1, i)]
+    }
+  }
+
+const repeatGG = (char) =>
+  function* () {
+    for (let i = 1; ; i++) {
+      yield Array(i).fill(char).join('')
+    }
+  }
+
+const listHeads = [
+  {
+    word: '\\lh-n',
+    countGenerator: function* () {
+      for (let i = 1; ; i++) {
+        yield i
+      }
+    },
+  },
+  {
+    word: '\\lh-a',
+    countGenerator: fromStringGG('abcdefghijklmnopqrstuvwxyz'),
+  },
+  {
+    word: '\\lh-A',
+    countGenerator: fromStringGG('ABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+  },
+  {
+    word: '\\lh-cn',
+    countGenerator: fromStringGG('➀➁➂➃➄➅➆➇➈➉'),
+  },
+  {
+    word: '\\lh-i',
+    countGenerator: repeatGG('i'),
+  },
+  {
+    word: '\\lh-I',
+    countGenerator: repeatGG('I'),
+  },
+]
+
 export default {
   name: 'result',
   data() {
@@ -41,6 +86,22 @@ export default {
       this.replacers.forEach(
         ([key, value]) => (newText = newText.replaceAll(key, value))
       )
+      const listHeadCounts = []
+      newText = newText.replaceAll(/^.*\\lh-.*$/gm, (line) => {
+        const indent = line.match(/^\s*/)[0]
+        const listHead = listHeads.find((lh) => line.match(lh.word))
+        if (!listHead) {
+          return line
+        }
+        listHeadCounts[indent.length] ??= {}
+        listHeadCounts.splice(indent.length + 1, listHeadCounts.length)
+        listHeadCounts[indent.length][listHead.word] ??=
+          listHead.countGenerator()
+        return line.replace(
+          listHead.word,
+          listHeadCounts[indent.length][listHead.word].next().value
+        )
+      })
       return newText
     },
     updateReplacer() {
