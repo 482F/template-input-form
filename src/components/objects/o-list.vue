@@ -66,9 +66,10 @@ export default {
         row = utils.textarea.getSelection(this.textarea).row
       }
       const text = utils.textarea.getRow(this.textarea, { row })
+      const head = this.getHead(0)
       const indent =
-        (text.match(new RegExp('^' + this.indentString + '+'))?.[0]?.length ??
-          (text.match(new RegExp('^' + this.getHead(0))) ? 0 : -2)) /
+        (text.match(new RegExp('^(' + this.indentString + ')+'))?.[0]?.length ??
+          (text.slice(0, head.length) === head ? 0 : -2)) /
         this.indentString.length
       return {
         text,
@@ -78,15 +79,14 @@ export default {
     indent(delta) {
       const { row } = utils.textarea.getSelection(this.textarea)
       const { text: rowText, indent: currentIndent } = this.getRow(row)
-      const newRowText =
-        this.getIndentText(Math.max(currentIndent + delta, 0)) +
-        (currentIndent === -1
+      const currentIndentText = this.getIndentText(currentIndent)
+      const unHeadText =
+        currentIndent === -1 ||
+        rowText.slice(0, currentIndentText.length) !== currentIndentText
           ? rowText
-          : rowText.replace(
-              new RegExp('^' + this.getIndentText(currentIndent)),
-              ''
-            ))
-
+          : rowText.slice(currentIndentText.length)
+      const newRowText =
+        this.getIndentText(Math.max(currentIndent + delta, 0)) + unHeadText
       utils.textarea.spliceRow(this.textarea, { row }, 1, newRowText)
     },
     onKeydown(e) {
