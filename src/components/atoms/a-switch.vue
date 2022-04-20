@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     focus() {
-      this.$refs.root?.$el?.getElementsByTagName('input')?.[0]?.focus?.[0]
+      this.$refs.root?.$el?.getElementsByTagName('input')?.[0]?.focus?.()
     },
   },
 }
